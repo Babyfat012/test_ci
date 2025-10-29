@@ -1,0 +1,34 @@
+name: Admin App CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: admin_app/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./admin_app
+        run: npm ci
+
+      - name: Build admin_app
+        working-directory: ./admin_app
+        run: npm run build --if-present
+
+      - name: Run admin_app tests
+        working-directory: ./admin_app
+        run: npm test
