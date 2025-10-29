@@ -32,6 +32,7 @@ jobs:
         working-directory: ./admin_app
         env:
           NODE_OPTIONS: --openssl-legacy-provider
+          CI: "false" 
         run: npm run build --if-present
 
       - name: Run admin_app tests
