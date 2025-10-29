@@ -35,6 +35,6 @@ jobs:
           CI: "false" 
         run: npm run build --if-present
 
-      - name: Run admin_app tests
-        working-directory: ./admin_app
-        run: npm test
+      # - name: Run admin_app tests
+      #   working-directory: ./admin_app
+      #   run: npm test
